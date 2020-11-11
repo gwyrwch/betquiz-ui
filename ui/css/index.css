@@ -1,0 +1,25 @@
+:root {
+    --main-bg-color: #e7e8ff;
+    --main-color: #dae8fd;
+    --white-color: #fffff;
+}
+
+body {
+    /*background-image: url("/img/main.webp");*/
+    background-color: var(--main-bg-color);
+}
+
+.table {
+    --table-width: 40vw;
+    --table-height: 38vh;
+    position: absolute;
+    top: calc(50vh - var(--table-height) / 2 - 1.5vw);
+    left: calc(50vw - var(--table-width) / 2 - 1.5vw);
+
+    width: var(--table-width);
+    height: var(--table-height);
+    background-color: var(--main-color);
+    border: #ffffff 2vh solid;
+    border-radius: 3vw;
+}
+
