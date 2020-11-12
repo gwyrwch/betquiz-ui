@@ -1,7 +1,19 @@
 :root {
-    --main-bg-color: #e7e8ff;
-    --main-color: #dae8fd;
-    --white-color: #fffff;
+    --main-bg-color: #F7F6FC;
+    --main-dark-bg-color: #ECE9FA;
+    --main-color: #ECF3FB   ;
+    --main-dark-color: #a4c8fa;
+    --secondary-color: #8DB5F0;
+    --white-color: #ffffff;
+    --font-color: #282a58;
+    --font-secondary-color: #A4B7D3;
+
+    --font-size: 18px;
+
+    --table-width: 40vw;
+    --table-height: 38vh;
+
+    font-family: "Menlo", monospace;
 }
 
 body {
@@ -9,17 +21,214 @@ body {
     background-color: var(--main-bg-color);
 }
 
-.table {
-    --table-width: 40vw;
-    --table-height: 38vh;
+button {
+    font-family: "Menlo", monospace;
+    font-size: 16px;
+
+    outline: none;
+}
+
+.back-button {
     position: absolute;
-    top: calc(50vh - var(--table-height) / 2 - 1.5vw);
+    left: 1vw;
+    top: 2vh;
+
+    width: 4vw;
+    height: 4vw;
+
+    background-color: var(--main-dark-color);
+
+    border: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+
+    color: white;
+}
+
+.back-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.table {
+    position: absolute;
+    top: calc(50vh - var(--table-height) / 2 - 1.5vw - 100vh / 6);
     left: calc(50vw - var(--table-width) / 2 - 1.5vw);
 
     width: var(--table-width);
     height: var(--table-height);
+
     background-color: var(--main-color);
-    border: #ffffff 2vh solid;
-    border-radius: 3vw;
+
+    border: var(--white-color) 2vh solid;
+    border-radius: 14vw;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+.user-field {
+    --user-field-height: calc(100vh / 5);
+
+    width: 100%;
+    height: var(--user-field-height);
+
+    position: absolute;
+    top: calc(100vh - var(--user-field-height));
+    left: 0;
+
+    background-color: var(--main-dark-bg-color);
+}
+
+.your-balance-value-div {
+    --balance-value-width: 20vw;
+    --balance-value-height: calc(var(--user-field-height) / 4);
+
+    width: var(--balance-value-width);
+    height: var(--balance-value-height);
+
+    position: absolute;
+    left: calc(50vw - var(--balance-value-width) / 2);
+    top: calc(-1 * var(--balance-value-height) / 2);
+
+    background-color: var(--white-color);
+
+    border-radius: 2vw;
+    /*box-shadow: 0 0 5px rgba(0,0,0,0.1);*/
+    border: #EEEBFC calc(var(--balance-value-height) / 10) solid;
+
+    text-align: center;
+}
+
+.your-balance-value-p {
+    font-size: var(--font-size);
+    margin: 0;
+    height: 100%;
+    padding-top: calc(var(--balance-value-height) / 2 - var(--font-size) / 2);
+    color: var(--font-color);
+}
+
+.user-field-button {
+    --user-field-button-width: 20vw;
+    --user-field-button-height: calc(var(--user-field-height) / 4);
+
+    width: var(--user-field-button-width);
+    height: var(--user-field-button-height);
+
+    border-radius: 2vw;
+    border: none;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+
+    background-color: var(--white-color);
+    color: var(--font-color);
+}
+
+.user-filed-button:hover {
+    background-color: var(--main-dark-color);
+    color: var(--white-color);
+}
+
+.user-buttons-div {
+    display: flex;
+    justify-content: space-evenly;
+
+    position: absolute;
+    top: calc(var(--user-field-height) / 2 - 1vh);
+
+    width: 100%;
+}
+
+.player-desc {
+    text-align: center;
+    /*width: 6vw;*/
+}
+
+.player-photo-img {
+    --photo-size: 4vw;
+
+    display: block;
+
+    width: var(--photo-size);
+    height: var(--photo-size);
+
+    border-radius: 50%;
+    border: var(--white-color) 3px solid;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+
+    margin-left: calc(50% - (2vw + 3px))
+}
+
+.user-photo-img {
+    border: var(--secondary-color) 3px solid;
+    box-shadow: 0 0 10px var(--secondary-color);
+}
+
+.player-balance-label {
+    color: var(--font-secondary-color);
+    display: block;
+    text-align: center;
+    font-size: smaller;
+}
+
+.player-username-label {
+    color: var(--font-color);
+    display: block;
+    text-align: center;
+}
+
+.first-player-desc {
+    position: absolute;
+    top: calc(50vh - var(--table-height) / 2 - 1.5vw - 100vh / 5);
+    left: calc(50vw - var(--table-width) / 2 - 2.5vw);
+}
+
+.second-player-desc {
+    position: absolute;
+    top: calc(50vh - var(--table-height) / 2 - 1.5vw - 100vh / 5);
+    left: calc(50vw - 2.5vw + var(--table-width) / 2);
+}
+
+.third-player-desc {
+    position: absolute;
+    top: calc(50vh - 1.5vw - 100vh / 5);
+    left: calc(50vw - 2.5vw + var(--table-width) / 2 + 8vw);
+}
+
+.forth-player-desc {
+    position: absolute;
+    top: calc(50vh - 1.5vw);
+    left: calc(50vw - 2.5vw + var(--table-width) / 2);
+}
+
+.fifth-player-desc {
+    position: absolute;
+    top: calc(50vh - 1.5vw);
+    left: calc(50vw - var(--table-width) / 2 - 2.5vw);
+}
+
+.sixth-player-desc {
+    position: absolute;
+    top: calc(50vh - 1.5vw - 100vh / 5);
+    left: calc(50vw - var(--table-width) / 2 - 2.5vw - 8vw);
+}
+
+
+.table-bank {
+    position: absolute;
+    top: calc(50vh - var(--table-height) / 2 - 1.5vw - 100vh / 6 - var(--table-height) / 4 / 2);
+    left: calc(50vw - var(--table-width) / 4 / 2);
+
+    width: calc(var(--table-width) / 4);
+    height: calc(var(--table-height) / 4);
+
+    text-align: center;
+
+    background-color: var(--main-dark-color);
+    color: var(--white-color);
+
+    padding-top: 2vh;
+
+    border-radius: 3vh;
+}
+
+.table-bank hr {
+    width: 70%;
+    border: var(--secondary-color) 1px solid;
+}
