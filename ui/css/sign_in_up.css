@@ -1,0 +1,127 @@
+.img-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 50vw;
+    height: 100vh;
+}
+
+.main-img-container {
+    position: relative;
+
+    background-image: url(/img/main.webp);
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: 170%;
+
+    height: 100%;
+    width: 100%;
+}
+
+.form-container {
+    position: absolute;
+    left: 42vw;
+    top: calc(50vh - 59vh / 2);
+
+    width: 53vw;
+    height: 59vh;
+
+    background-color: rgba(var(--main-dark-color-rgb), 0.95);
+
+    border: 1px var(--main-dark-bg-color) solid;
+    border-radius: 2vh;
+    box-shadow: 0 0 3px var(--form-font-color);
+
+    padding: 2vw 2vw 3vw;
+}
+
+.form-fieldset {
+    border: 1px var(--form-font-color) solid;
+    border-radius: 2vh;
+
+    font-size: small;
+    color: var(--form-font-color);
+
+    padding: 1vw;
+    margin-bottom: 1vw;
+}
+
+.form-container label {
+    width: 0;
+
+    font-size: larger;
+    color: var(--form-font-color);
+}
+
+.set-div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+
+    width: 100%;
+
+    margin: 10px 0;
+}
+
+.form-container input {
+    height: 3vh;
+    width: 45%;
+
+    padding-left: 5px;
+
+    margin-right: 2%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+
+    outline: none;
+
+    border: 0;
+    border-bottom: 1px solid var(--form-font-color);
+
+    background-color: transparent;
+
+    font-size: 16px;
+    font-family: "Menlo", monospace;
+    color: var(--form-font-color);
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: var(--form-font-color);
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: var(--form-font-color);
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: var(--form-font-color);
+    opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--form-font-color);
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--form-font-color);
+}
+
+::placeholder {
+    color: var(--form-font-color);
+    opacity: 0.7;
+}
+
+.submit-div {
+    text-align: center;
+
+    margin-top: 1vh;
+}
+
+.form-container input[type=submit] {
+    background-color: var(--form-font-color);
+
+    color: var(--white-color);
+
+    height: 4vh;
+    width: 30%;
+
+    border-radius: 5px;
+}

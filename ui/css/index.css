@@ -1,6 +1,7 @@
 :root {
     --main-bg-color: #F7F6FC;
-    --main-dark-bg-color: #ECE9FA;
+    --main-dark-color-rgb: 247, 246, 252;
+    --main-dark-bg-color: #ece9fa;
     --main-color: #ECF3FB   ;
     --main-dark-color: #a4c8fa;
     --secondary-color: #8DB5F0;
@@ -13,12 +14,15 @@
     --table-width: 40vw;
     --table-height: 38vh;
 
+    --form-font-color: #5050b3; /*#A999F8*/
+
     font-family: "Menlo", monospace;
 }
 
 body {
     /*background-image: url("/img/main.webp");*/
     background-color: var(--main-bg-color);
+    overflow: hidden;
 }
 
 button {
@@ -120,7 +124,7 @@ button {
     color: var(--font-color);
 }
 
-.user-filed-button:hover {
+.user-field-button:hover {
     background-color: var(--main-dark-color);
     color: var(--white-color);
 }
