@@ -1,0 +1,360 @@
+:root {
+    --user-information-card-width: 20vw;
+    --user-information-card-height: 23vh;
+}
+
+.user-information-card {
+    position: absolute;
+    top: 4vh;
+    left: calc(50vw - var(--user-information-card-width) / 2 - 2vw - 2vh);
+
+    background-color: var(--main-color);
+
+    width: var(--user-information-card-width);
+    height: var(--user-information-card-height);
+
+    text-align: center;
+
+    padding: 2vw;
+
+    border: 2vh var(--white-color) solid;
+    border-radius: 5vh;
+}
+
+.user-profile-photo-img {
+    width: 10vw;
+    height: 10vw;
+
+    border-radius: 50%;
+
+    margin-bottom: 2vh;
+}
+
+.user-profile-name-surname {
+    margin-bottom: 0.6vh;
+
+    color: var(--main-dark-color);
+}
+
+.user-profile-username {
+    color: var(--secondary-color);
+}
+
+.profile-buttons-div {
+    position: absolute;
+    top: 4vh;
+    left: calc(50vw + var(--user-information-card-width) / 2 + 2.5vw);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    height: calc(var(--user-information-card-height) + 4vh);
+    padding: 2vw;
+
+}
+
+.profile-buttons-div button {
+    display: block;
+
+    width: 4vw;
+    height: 4vw;
+
+    color: var(--white-color);
+    background-color: var(--secondary-color);
+
+    border: none;
+    border-radius: 50%;
+
+    font-size: calc(var(--font-size) + 2px);
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 300; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    margin: 10% auto;
+    padding: 15px;
+    width: 35%;
+    background: var(--white-color);
+    border-radius: 8px;
+}
+
+/*card style*/
+
+#addCreditCardModal input, select {
+    color: rgba(255, 255, 255, 0.5);
+    outline: none;
+}
+#addCreditCardModal input option, select option {
+    color: gray;
+}
+
+#addCreditCardModal ::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#addCreditCardModal ::-moz-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#addCreditCardModal :-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#addCreditCardModal :-moz-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#addCreditCardModal #area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    perspective: 500px;
+    flex-direction: column;
+    margin: 20px;
+}
+
+#addCreditCardModal #area .master-card {
+    padding: 15px;
+    border-radius: 10px;
+    height: 150px;
+    max-height: 150px;
+    width: 280px;
+    position: relative;
+}
+
+#addCreditCardModal #area .master-card .card {
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: var(--main-dark-color);
+
+    height: 160px;
+    max-height: 160px;
+    width: 280px;
+
+    overflow: hidden;
+    z-index: 2;
+}
+
+#addCreditCardModal #area .master-card .card .title {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 5px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#addCreditCardModal #area .master-card .card .input-number .title-number {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+#addCreditCardModal #area .master-card .card .input-number .inputs-number {
+    display: flex;
+}
+
+#addCreditCardModal #area .master-card .card .input-number .inputs-number input {
+    background: rgba(255, 255, 255, 0.2);
+
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+
+    border: none;
+    border-radius: 2px;
+
+    height: 15px;
+    width: 45px;
+
+    padding: 5px 4px;
+    margin: 5px;
+
+    outline: none;
+}
+
+#addCreditCardModal #area .master-card .card .selects-date {
+    height: 40px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: initial;
+}
+
+#addCreditCardModal #area .master-card .card .selects-date span {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+#addCreditCardModal #area .master-card .card .selects-date .month-select span, #area .master-card .card .selects-date .year-select span {
+    display: block;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+#addCreditCardModal #area .master-card .card .selects-date select {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    border: none;
+    width: 50px;
+    height: 25px;
+    border-radius: 2px;
+    text-align: center;
+    margin: 5px;
+    outline: none;
+}
+
+#addCreditCardModal #area .master-card .card .name-cvv-div {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    padding: 10px 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+#addCreditCardModal #area .master-card .card .secret-area {
+    display: inline;
+
+    height: 15px;
+    border-radius: 3px;
+}
+
+#addCreditCardModal #area .master-card .card .secret-area input {
+    border: none;
+    width: 30px;
+    text-align: center;
+    padding: 5px 4px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+
+.modal-card-confirm-buttons-div {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 85px;
+    margin-right: 85px;
+}
+
+.modal-card-confirm-buttons-div button {
+    color: var(--white-color);
+
+    border: none;
+    border-radius: 10px;
+
+    padding: 5px 10px;
+}
+
+.modal-card-confirm-buttons-div button:hover {
+    opacity: 70%;
+    cursor: pointer;
+}
+
+.modal-card-confirm-buttons-div #updateCardConfirmButton {
+    background-color: #b4e092;
+}
+
+.modal-card-confirm-buttons-div #updateCardCancelButton {
+    background-color: #F1A0CB;
+}
+
+.p-card-text {
+    text-align: center;
+    color: var(--font-color);
+}
+
+.analytics {
+    position: absolute;
+    top: 43vh;
+    left: 0;
+
+    display: flex;
+    justify-content: space-evenly;
+
+    height: 53vh;
+    width: 100vw;
+
+    /*background: aqua;*/
+}
+
+.user-curve {
+    display: inline-block;
+    width: 60vw;
+    /*height: 100%;*/
+    background-color: #5050b3;
+}
+
+.rating-top {
+    display: inline-block;
+
+    width: 20vw;
+    height: 75%;
+    background-color: rgba(var(--main-color-rgb), 0.7);
+
+    padding: 1vw;
+
+    border-radius: 35px;
+
+
+    color: var(--font-color);
+}
+
+.rating-top h3 {
+    text-align: center;
+    margin-top: 3px;
+    margin-bottom: 7px;
+}
+
+.rating-top table {
+    width: 100%;
+}
+
+.rating-top table th {
+    /*min-width: 30%;*/
+    text-align: left;
+}
+
+.rating-top table td {
+    padding-top: 0.7vw;
+    padding-bottom: 0.5vw;
+    /*border-bottom: 1px solid #282a58;*/
+}
+
+.td-rating-div {
+    display: flex;
+    align-items: center;
+}
+
+.rating-top .rating-top-photo-img {
+    max-width: 3vw;
+    width: 2.5vw;
+    height: 2.5vw;
+
+    margin-right: 10px;
+
+    border-radius: 50%;
+}
+
+.rating-top .rating-top-first {
+    color: #FFD700
+}
+
+.rating-top .rating-top-second {
+    color: #c0c0c0
+}
+
+.rating-top-third {
+    color: #cd7f32;
+}
