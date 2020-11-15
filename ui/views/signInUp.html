@@ -5,11 +5,18 @@
         </div>
     </div>
     <div class="sign-in-up-buttons-div">
-        <button class="sign-in-up-button sign-in-button">Sign in</button>
+        <button class="
+            sign-in-up-button
+            sign-in-button
+            selected-sign-in-up-button
+            selected-sign-in-button"
+        >
+            Sign in
+        </button>
         <button class="sign-in-up-button sign-up-button">Sign up</button>
     </div>
-    <div class="form-container">
-        <form>
+    <div class="form-container-sign-up">
+        <form class="sign-up-form" style="display: none">
             <fieldset class="form-fieldset">
                 <legend>Sign in info</legend>
                 <div class="set-div">
@@ -51,6 +58,21 @@
             </fieldset>
             <div class="submit-div">
                 <input type="submit" id="submitButtonSignUp" value="Sign up">
+            </div>
+        </form>
+
+        <form class="sign-in-form">
+            <fieldset class="form-fieldset">
+                <legend>Sign in info</legend>
+
+                <label for="usernameSignIn"></label>
+                <input type="text" id="usernameSignIn" placeholder="username">
+
+                <label for="passwordSignIn"></label>
+                <input type="password" id="passwordSignIn" placeholder="password">
+            </fieldset>
+            <div class="submit-div">
+                <input type="submit" id="submitButtonSignIn" value="Sign in">
             </div>
         </form>
     </div>
