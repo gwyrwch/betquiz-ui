@@ -7,10 +7,20 @@ export default class Profile extends Page {
         super();
 
         let self = this;
-        self.setPaymentInFormationButtonOnclick();
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                console.log(user.uid);
+
+
+            } else {
+                // No user is signed in.
+            }
+        });
+        self.setPaymentInformationButtonOnclick();
     }
 
-    setPaymentInFormationButtonOnclick() {
+    setPaymentInformationButtonOnclick() {
         let self = this;
 
         let cardButton = document.getElementsByClassName('payment-info-button').item(0);

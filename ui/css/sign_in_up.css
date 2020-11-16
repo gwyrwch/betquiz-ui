@@ -97,6 +97,11 @@
     color: var(--form-font-color);
 }
 
+.input-invalid-data {
+    border-bottom: 1px solid var(--error-color) !important;
+    color: var(--error-color) !important;
+}
+
 .form-container-sign-up .sign-in-form input {
     width: 92%;
     margin-right: 3%;
