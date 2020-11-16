@@ -358,3 +358,7 @@
 .rating-top-third {
     color: #cd7f32;
 }
+
+.sign-out-button:hover {
+    background-color: var(--error-color);
+}

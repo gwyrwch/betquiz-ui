@@ -41,7 +41,17 @@ export default class SignInUp extends Page {
         let signInForm = document.getElementsByClassName('sign-in-form').item(0);
 
         signInForm.onsubmit = function () {
-            console.log(document.getElementById('usernameSignIn').value);
+            let email = document.getElementById('emailSignIn').value;
+            let password = document.getElementById('passwordSignIn').value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(function(result) {
+                    location.replace('#profile');
+                }).catch(function(error) {
+                    // TODO: show error
+                    console.log('err in sign in');
+                    console.log(error);
+            });
             return false;
         }
     }
@@ -160,8 +170,6 @@ export default class SignInUp extends Page {
                     return false;
                 }
             );
-
-
 
             // DatabaseOperations.createUserAndSaveToDatabase(self.userId, username, email, password, name, surname);
             return false;

@@ -12,12 +12,40 @@ export default class Profile extends Page {
             if (user) {
                 console.log(user.uid);
 
+                let userId = user.uid;
+                firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+                    let userDB = snapshot.val();
+                    if (userDB) {
+                        let usernameHtml = document.getElementsByClassName(
+                            'user-profile-username'
+                        ).item(0);
+                        usernameHtml.innerHTML = '@' + userDB.username;
 
+                        let nameSurnameHtml = document.getElementsByClassName(
+                            'user-profile-name-surname'
+                        ).item(0);
+                        nameSurnameHtml.innerHTML = userDB.name + ' ' + userDB.surname;
+                    }
+                });
             } else {
                 // No user is signed in.
             }
         });
+
+
         self.setPaymentInformationButtonOnclick();
+        self.setLogoutButtonOnclick();
+    }
+
+    setLogoutButtonOnclick() {
+        let logoutButton = document.getElementsByClassName('sign-out-button').item(0);
+        logoutButton.onclick = function () {
+            firebase.auth().signOut().then(function() {
+                location.replace('#sign_in_up');
+            }).catch(function(error) {
+                console.log('Error when sign out user', error);
+            });
+        }
     }
 
     setPaymentInformationButtonOnclick() {
