@@ -1,0 +1,116 @@
+.card-profile {
+    --card-profile-width: 25vw;
+
+    position: absolute;
+    top: 3vh;
+    left: calc(50vw - var(--card-profile-width) / 2 - 1vw);
+
+    width: var(--card-profile-width);
+
+    background-color: var(--main-dark-color);
+
+    text-align: center;
+    color: var(--white-color);
+
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+
+    padding: 1vw;
+
+    transition-property: transform;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+}
+
+.card-profile:hover {
+    opacity: 50%;
+    transform: scale(1.1);
+}
+
+.card-profile-img {
+    /*max-width: 4vw;*/
+    width: 12vw;
+    height: 12vw;
+
+    border-radius: 50%;
+}
+
+.table-cards-container {
+    position: absolute;
+    top: 43vh;
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card-table {
+    background: var(--main-dark-color);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-radius: 10px;
+
+    color: rgb(236, 236, 236);
+    font-size: var(--font-size);
+
+    text-align: center;
+
+    transition-property: transform;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+
+    width: 18vw;
+    height: 38vh;
+}
+
+.card-table:hover {
+    opacity: 50%;
+    transform: scale(1.1);
+}
+
+.card-img {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+    margin-bottom: 1.5vh;
+
+    width: 100%;
+    height: 75%;
+}
+
+.card-random-table-img {
+    background-image: url("/img/worm.jpg");
+    background-repeat: no-repeat;
+    background-position: 70% 45%;
+    background-size: 200%;
+}
+
+.card-create-table-img {
+    background-image: url("/img/brain.png");
+    background-repeat: no-repeat;
+    background-position: 70% 40%;
+    background-size: 250%;
+}
+
+.card-join-table-img {
+    background-image: url("/img/sandy2.png");
+    background-repeat: no-repeat;
+    background-position: 80% 45%;
+    background-size: 200%;
+}
+
+.start-game-text {
+    position: absolute;
+    left: 0;
+    top: calc(3vh + 2vw + 20vw);
+
+    width: 100%;
+
+    text-align: center;
+    text-transform: uppercase;
+
+    font-weight: bold;
+    font-size: larger;
+    color: var(--font-color);
+}
