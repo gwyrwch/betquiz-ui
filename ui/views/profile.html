@@ -15,7 +15,7 @@
 </div>
 
 <div class="profile-buttons-div">
-    <button title="Settings">
+    <button title="Settings" class="settings-button">
         <i class="fas fa-cogs"></i>
     </button>
     <button title="Payment information" class="payment-info-button">
@@ -159,3 +159,36 @@
         </table>
     </div>
 </div>
+
+<div class="setting-form-container">
+    <form class="settings-form">
+        <fieldset class="form-fieldset">
+            <legend>Username update</legend>
+            <label for="usernameProfileSettings"></label>
+            <input type="text" id="usernameProfileSettings" placeholder="username">
+        </fieldset>
+        <fieldset class="form-fieldset">
+            <legend>Password update</legend>
+            <label for="passwordProfileSettings"></label>
+            <input type="password" id="passwordProfileSettings" placeholder="password">
+            <label for="passwordConfirmProfileSettings"></label>
+            <input type="password" id="passwordConfirmProfileSettings" placeholder="password repeat">
+        </fieldset>
+        <div class="submit-div">
+            <input type="submit" id="submitButtonProfileSettings" value="Save">
+        </div>
+    </form>
+</div>
+
+
+<div id="modalConfirmProfileChanges" class="modal">
+    <div class="modal-content">
+        <div class="menu-modal-header-div">Current password:</div>
+        <label>
+            <input class="confirm-current-password" type="password" placeholder="password">
+        </label>
+        <button class="confirm-profile-changes-button">Confirm</button>
+        <button class="cancel-profile-changes-button">Cancel</button>
+    </div>
+</div>
+

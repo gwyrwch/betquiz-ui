@@ -35,6 +35,7 @@ export default class Profile extends Page {
 
         self.setPaymentInformationButtonOnclick();
         self.setLogoutButtonOnclick();
+        self.setSettingsButtonOnclick();
     }
 
     setLogoutButtonOnclick() {
@@ -71,6 +72,80 @@ export default class Profile extends Page {
 
     savePaymentInformation() {
         //    TODO:
+    }
+
+    setSettingsButtonOnclick() {
+        let settingsButton = document.getElementsByClassName('settings-button').item(0);
+        let form = document.getElementsByClassName('settings-form').item(0);
+
+        form.onsubmit = function () {
+            let modalId = 'modalConfirmProfileChanges';
+            Modal.showModal(modalId);
+
+            let cancelButton = document.getElementsByClassName('cancel-profile-changes-button').item(0);
+            cancelButton.onclick = function () {
+                Modal.hideModal(modalId)
+            }
+
+            let confirmButton = document.getElementsByClassName('confirm-profile-changes-button').item(0);
+            confirmButton.onclick = function () {
+                var user = firebase.auth().currentUser;
+
+                let password = document.getElementsByClassName(
+                    'confirm-current-password'
+                ).item(0).value;
+
+                const credential = firebase.auth.EmailAuthProvider.credential(
+                    user.email,
+                    password
+                );
+
+                user.reauthenticateWithCredential(
+                    credential
+                ).then(function() {
+                    let newUsername = document.getElementById('usernameProfileSettings').value;
+                    let password = document.getElementById('passwordProfileSettings').value;
+
+                    let userId = firebase.auth().currentUser.uid;
+                    firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+                        let userDB = snapshot.val();
+                        if (userDB) {
+                            if (userDB.username !== newUsername) {
+                                firebase.database().ref('users/' + userId).update({
+                                    username: newUsername,
+                                })
+                            }
+
+                            if (password.length > 6) {
+                                user.updatePassword(password).then(function() {
+                                    console.log('password updated');
+                                }).catch(function(error) {
+                                    console.log(error, 'in settings button');
+                                });
+                            }
+
+                            Modal.hideModal(modalId);
+                            location.reload();
+                        }
+
+                    });
+                }).catch(function(error) {
+                    console.log('err credential', error);
+                });
+
+            }
+
+            return false;
+        }
+
+        settingsButton.onclick = function () {
+
+            if (form.style.display === 'block') {
+                form.style.display = 'none';
+            } else {
+                form.style.display = 'block';
+            }
+        }
     }
 
     static getHtml() {

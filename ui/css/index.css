@@ -19,6 +19,8 @@
     --form-font-color: #5050b3; /*#A999F8*/
     --form-font-color-rgb: 80, 80, 179;
     font-family: "Menlo", monospace;
+
+    --settings-profile-form-width: calc(var(--user-information-card-width) + 5vw);
 }
 
 body {

@@ -362,3 +362,82 @@
 .sign-out-button:hover {
     background-color: var(--error-color);
 }
+
+.payment-info-button:hover, .settings-button:hover {
+    opacity: 0.7;
+}
+
+
+.setting-form-container {
+    position: absolute;
+    top: 4vh;
+    left: 70vw;
+
+    width: var(--settings-profile-form-width);
+    height: var(--user-information-card-height);
+}
+
+.setting-form-container .settings-form {
+    display: none;
+}
+
+.setting-form-container .settings-form input[type=text], input[type=password]  {
+    width: calc(var(--settings-profile-form-width) / 2 - 2.5vw - 5px);
+
+    padding-left: 5px;
+
+    background-color: transparent;
+    color: var(--form-font-color);
+
+    border: none;
+    border-bottom: 1px solid var(--form-font-color);
+    outline: none;
+}
+
+.setting-form-container .settings-form input[type=submit]  {
+    background-color: #b4e092;
+
+    color: var(--white-color);
+
+    border: none;
+    outline: none;
+
+    width: 6vw;
+    height: 3.5vh;
+
+    border-radius: 15px;
+}
+
+.confirm-current-password {
+    display: block;
+}
+
+#modalConfirmProfileChanges button {
+    width: 7vw;
+    height: 4vh;
+
+    border-radius: 2vw;
+    border: none;
+
+    color: var(--white-color);
+}
+
+#modalConfirmProfileChanges input {
+    width: calc(95% - 5px);
+
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    padding-left: 5px;
+
+    font-size: calc(var(--font-size) - 1px);
+    color: var(--form-font-color);
+}
+
+.confirm-profile-changes-button {
+    background-color: #b4e092;
+}
+
+.cancel-profile-changes-button {
+    background-color: #F1A0CB;
+}
+

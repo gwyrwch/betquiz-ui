@@ -1,10 +1,19 @@
 import Page from "./Page";
 import html from '../views/menu.html';
 import Modal from "./Modal";
+const io = require('socket.io-client');
 
 export default class Menu extends Page {
     constructor() {
         super();
+
+        let socket = io('130.193.57.125:3000', {
+            forceNew: false
+        });
+        socket.emit('ping');
+        socket.on('pong', () => {
+           alert(123);
+        });
 
         let self = this;
 
