@@ -2,7 +2,7 @@
     <div class="card-img">
         <img src="/img/main.webp" class="card-profile-img" alt="">
     </div>
-    <i class="fa fa-user-o"></i> <label>@gwyrwch</label>
+    <i class="fa fa-user-o"></i> <label class="username-menu" >@</label>
 </div>
 
 <div class="start-game-text">Start a game!</div>
@@ -21,5 +21,20 @@
     <div class=" card-table card-join-table">
         <div class="card-img card-join-table-img"></div>
         <i class="fa fa-users"></i> Join table
+    </div>
+</div>
+
+
+<div id="gameMenuModal" class="modal">
+    <div class="modal-content">
+        <div class="menu-modal-header-div">Enter table ID:</div>
+        <label>
+            <input class="menu-modal-input menu-game-table-id" type="text" placeholder="Table ID">
+        </label>
+        <label>
+            <input class="menu-modal-input menu-game-buy-in" type="number" placeholder="Buy in">
+        </label>
+        <button class="start-game-button">Start</button>
+        <button class="cancel-start-game-button">Cancel</button>
     </div>
 </div>

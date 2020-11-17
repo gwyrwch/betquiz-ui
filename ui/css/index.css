@@ -17,7 +17,7 @@
     --table-height: 38vh;
 
     --form-font-color: #5050b3; /*#A999F8*/
-
+    --form-font-color-rgb: 80, 80, 179;
     font-family: "Menlo", monospace;
 }
 
