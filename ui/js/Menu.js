@@ -2,7 +2,6 @@ import Page from "./Page";
 import html from '../views/menu.html';
 import Modal from "./Modal";
 
-const io = require('socket.io-client');
 
 export default class Menu extends Page {
     constructor() {
@@ -128,6 +127,8 @@ export default class Menu extends Page {
                         buyIn: buyIn,
                         enterCode: enterCode
                     });
+
+                    Modal.hideModal(modalId);
                 }
             }
         );

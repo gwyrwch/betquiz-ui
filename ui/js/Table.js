@@ -3,8 +3,6 @@ import html from '../views/table.html';
 import BackButton from "./BackButton";
 import DatabaseOperations from "./DatabaseOperations";
 
-const io = require('socket.io-client');
-
 let MOVE_TYPE = {
     BLIND: {value: 0, name: 'blind'},
     FOLD: {value: 1, name: 'fold'},
@@ -20,9 +18,8 @@ export default class Table extends Page {
 
         let self = this;
         let backButton = new BackButton(() => {
-            console.log(self.table.state);
-            return self.table.state.name !== 'running';
-        }, 'Sorry, wait for the game to finish.');
+            socket.emit('leave table');
+        });
         self.ownerId = firebase.auth().currentUser.uid;
 
         socket.on('player joined', (response) => {
@@ -62,6 +59,7 @@ export default class Table extends Page {
         let myPos;
 
         let descs = document.getElementsByClassName('player-desc');
+        // imagine all folded and noone is current player
         for (let playerDesc of descs) {
             if (!playerDesc.classList.contains('player-desc-empty-seat-folded')) {
                 playerDesc.classList.add('player-desc-empty-seat-folded');
@@ -73,8 +71,6 @@ export default class Table extends Page {
             let playerId = player.id;
             let stack = player.stack;
             let currentPlayerPos = pos++;
-
-            console.log(playerId, stack);
 
             if (playerId === self.ownerId) {
                 myPos = currentPlayerPos;
@@ -89,6 +85,13 @@ export default class Table extends Page {
                         = '$' + self.table.players[currentPlayerPos].stack;
                 }
             );
+        }
+
+        for (let i = players.length; i < descs.length; i++) {
+            let playerDesc = descs.item(i);
+            playerDesc.getElementsByClassName('player-username-label').item(0).innerHTML = 'empty seat';
+            playerDesc.getElementsByClassName('player-balance-label').item(0).innerHTML
+                = '$' + 10000;
         }
 
         let buttons = document.getElementsByClassName('user-field-button');
@@ -114,7 +117,7 @@ export default class Table extends Page {
                 if (!self.table.gameState.hasFolded[i]) {
                     descs[i].classList.remove('player-desc-empty-seat-folded');
                 }
-                // выводим bank
+                // выводим bets
                 if (!self.table.gameState.betPhaseEnded && (self.table.gameState.hasPlayedThisStreet[i]
                     || self.table.gameState.bets[i] > 0)) {
                     descs[i].getElementsByClassName('player-bet').item(0).innerHTML =
@@ -125,6 +128,7 @@ export default class Table extends Page {
                 }
             }
 
+            // выводим банк
             document.getElementsByClassName('table-bank-val').item(0).innerHTML = '$' + self.table.gameState.bank;
 
             // выводим нашего игрока
@@ -153,10 +157,9 @@ export default class Table extends Page {
 
                 let playerInp = document.getElementsByClassName('player-input').item(0);
 
-
                 if (self.table.gameState.betPhaseEnded) {
                     playerInp.value = '';
-                    playerInp.placeholder = 'enter answer...';
+                    playerInp.placeholder = `enter answer... (${self.table.currentQuestion.answer.length} symbols)`;
                     buttons.item(0).innerHTML = 'Answer';
                     buttons.item(0).disabled = false;
                     buttons.item(0).classList.add('answer-button');
@@ -175,10 +178,10 @@ export default class Table extends Page {
                     playerInp.value = self.table.gameState.lastRaiseBet;
                     playerInp.placeholder = 'enter bet...';
 
-                    playerInp.oninput = function () {
-                      let val = this.value;
-                      // todo checks
-                    };
+                    // playerInp.oninput = function () {
+                    //   let val = this.value;
+                    //   // todo checks
+                    // };
 
                     for (let i = 0; i < 3; i++) {
                         buttons.item(i).disabled = false;
@@ -213,12 +216,18 @@ export default class Table extends Page {
                                 request.bet = 0;
                             } else if (moveType === 'Raise') {
                                 let raiseVal = parseInt(playerInp.value);
-                                console.log('raising on ' + raiseVal);
+                                if (raiseVal <= self.table.gameState.lastRaiseBet) {
+                                    alert('Please bet more than previous raise');
+                                    return;
+                                }
                                 request.moveType = MOVE_TYPE.RAISE;
                                 request.bet = raiseVal;
                             } else if (moveType === 'Call') {
                                 let callVal = parseInt(playerInp.value);
-                                console.log('calling on ' + callVal);
+                                if (callVal !== self.table.gameState.lastRaiseBet) {
+                                    alert('Please call with previous raise bet (default)');
+                                    return;
+                                }
                                 request.moveType = MOVE_TYPE.CALL;
                                 request.bet = callVal;
                             }
