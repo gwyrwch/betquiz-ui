@@ -3,66 +3,95 @@
 </button>
 
 <div class="table">
-
+    <div class="question-category-div">
+        <div class="category-div"></div>
+        <div class="question-div">
+            <div class="question-part question-first-part">
+            </div>
+            <div class="separator"></div>
+            <div class="question-part question-second-part">
+            </div>
+            <div class="separator"></div>
+            <div class="question-part question-third-part">
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="table-bank">
     Bank
     <hr>
-    $1005
+    <div class="table-bank-val">
+        $0
+    </div>
 </div>
 
-<div class="player-desc first-player-desc">
-    <img src="/img/main.webp" class="player-photo-img user-photo-img" alt="">
-    <label class="player-username-label">gwyrwch</label>
-    <label class="player-balance-label">$987</label>
-</div>
-
-<div class="player-desc second-player-desc">
+<div class="player-desc first-player-desc player-desc-empty-seat-folded">
     <img src="/img/main.webp" class="player-photo-img" alt="">
-    <label class="player-username-label">grispy</label>
-    <label class="player-balance-label">$1405</label>
+    <label class="player-username-label">empty seat</label>
+    <label class="player-balance-label">$-</label>
+    <div class="player-bet first-player-bet">
+    </div>
 </div>
 
-<div class="player-desc third-player-desc">
+
+<div class="player-desc second-player-desc player-desc-empty-seat-folded">
     <img src="/img/main.webp" class="player-photo-img" alt="">
-    <label class="player-username-label">hloya</label>
-    <label class="player-balance-label">$1</label>
+    <label class="player-username-label">empty seat</label>
+    <label class="player-balance-label">$-</label>
+
+    <div class="player-bet second-player-bet">
+
+    </div>
 </div>
 
-<div class="player-desc forth-player-desc">
+<div class="player-desc third-player-desc player-desc-empty-seat-folded">
     <img src="/img/main.webp" class="player-photo-img" alt="">
-    <label class="player-username-label">andrew</label>
-    <label class="player-balance-label">$1302</label>
+    <label class="player-username-label">empty seat</label>
+    <label class="player-balance-label">$-</label>
+
+    <div class="player-bet third-player-bet">
+    </div>
 </div>
 
-<div class="player-desc fifth-player-desc">
+<div class="player-desc forth-player-desc player-desc-empty-seat-folded">
     <img src="/img/main.webp" class="player-photo-img" alt="">
-    <label class="player-username-label">fedosik</label>
-    <label class="player-balance-label">$1473</label>
+    <label class="player-username-label">empty seat</label>
+    <label class="player-balance-label">$-</label>
+
+    <div class="player-bet forth-player-bet">
+    </div>
 </div>
 
-<div class="player-desc sixth-player-desc">
+<div class="player-desc fifth-player-desc player-desc-empty-seat-folded">
     <img src="/img/main.webp" class="player-photo-img" alt="">
-    <label class="player-username-label">ruide</label>
-    <label class="player-balance-label">$9787</label>
+    <label class="player-username-label">empty seat</label>
+    <label class="player-balance-label">$-</label>
+
+    <div class="player-bet fifth-player-bet">
+    </div>
+</div>
+
+<div class="player-desc sixth-player-desc player-desc-empty-seat-folded">
+    <img src="/img/main.webp" class="player-photo-img" alt="">
+    <label class="player-username-label">empty seat</label>
+    <label class="player-balance-label">$-</label>
+
+    <div class="player-bet sixth-player-bet">
+    </div>
 </div>
 
 
 <div class="user-field">
     <div class="your-balance-value-div">
-        <p class="your-balance-value-p">$987.47</p>
+        <label>
+            <input class="player-input" placeholder="enter bet..."/>
+        </label>
     </div>
     <div class="user-buttons-div">
-        <button class="user-field-button" id="foldUserButton">
-            Fold
-        </button>
-        <button class="user-field-button" id="callUserButton">
-            Call
-        </button>
-        <button class="user-field-button" id="raiseUserButton">
-            Raise
-        </button>
+        <button class="user-field-button" id="foldUserButton" disabled>Fold</button>
+        <button class="user-field-button" id="callUserButton" disabled>Call</button>
+        <button class="user-field-button" id="raiseUserButton" disabled>Raise</button>
     </div>
 </div>
 

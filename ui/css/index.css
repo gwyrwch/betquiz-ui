@@ -5,11 +5,12 @@
     --main-color: #ECF3FB;
     --main-color-rgb: 236, 243, 251;
     --main-dark-color: #a4c8fa;
-    --secondary-color: #8DB5F0;
+    --secondary-color: #8db5f0;
     --white-color: #ffffff;
     --font-color: #282a58;
     --font-secondary-color: #A4B7D3;
     --error-color: #ff232d;
+    --success-color: #b4e092;
 
     --font-size: 18px;
 
@@ -32,7 +33,6 @@ body {
 button {
     font-family: "Menlo", monospace;
     font-size: 16px;
-
     outline: none;
 }
 
@@ -105,12 +105,16 @@ button {
     text-align: center;
 }
 
-.your-balance-value-p {
+.player-input {
     font-size: var(--font-size);
-    margin: 0;
-    height: 100%;
-    padding-top: calc(var(--balance-value-height) / 2 - var(--font-size) / 2);
     color: var(--font-color);
+
+    width: calc(100% - 2vw);
+    height: 95%;
+
+    outline: none;
+    border-radius: 2vw;
+    border: none;
 }
 
 .user-field-button {
@@ -131,6 +135,14 @@ button {
 .user-field-button:hover {
     background-color: var(--main-dark-color);
     color: var(--white-color);
+}
+
+button:disabled,
+button[disabled],
+button[disabled]:hover{
+    /*border: 1px solid #999999;*/
+    background-color: #cccccc;
+    color: #666666;
 }
 
 .user-buttons-div {
@@ -187,10 +199,22 @@ button {
     left: calc(50vw - var(--table-width) / 2 - 2.5vw);
 }
 
+.first-player-bet {
+    position: relative;
+    top: -1vh;
+    left: 5vw;
+}
+
 .second-player-desc {
     position: absolute;
     top: calc(50vh - var(--table-height) / 2 - 1.5vw - 100vh / 5);
     left: calc(50vw - 2.5vw + var(--table-width) / 2);
+}
+
+.second-player-bet {
+    position: relative;
+    top: -1vh;
+    left: -9vw;
 }
 
 .third-player-desc {
@@ -199,10 +223,22 @@ button {
     left: calc(50vw - 2.5vw + var(--table-width) / 2 + 8vw);
 }
 
+.third-player-bet {
+    position: relative;
+    left: -13vw;
+    top: -6vh;
+}
+
 .forth-player-desc {
     position: absolute;
     top: calc(50vh - 1.5vw);
     left: calc(50vw - 2.5vw + var(--table-width) / 2);
+}
+
+.forth-player-bet {
+    position: relative;
+    top: -13vh;
+    left: -9vw;
 }
 
 .fifth-player-desc {
@@ -211,10 +247,22 @@ button {
     left: calc(50vw - var(--table-width) / 2 - 2.5vw);
 }
 
+.fifth-player-bet {
+    position: relative;
+    top: -13vh;
+    left: 5vw;
+}
+
 .sixth-player-desc {
     position: absolute;
     top: calc(50vh - 1.5vw - 100vh / 5);
     left: calc(50vw - var(--table-width) / 2 - 2.5vw - 8vw);
+}
+
+.sixth-player-bet {
+    position: relative;
+    left: 9vw;
+    top: -6vh;
 }
 
 
@@ -239,4 +287,58 @@ button {
 .table-bank hr {
     width: 70%;
     border: var(--secondary-color) 1px solid;
+}
+
+.question-category-div {
+    --question-category-div-height: 10vh;
+
+    position: relative;
+    top: calc(var(--table-height) / 2 - var(--question-category-div-height) / 2);
+
+}
+
+.category-div {
+    text-align: center;
+    font-size: var(--font-size);
+    font-weight: bolder;
+    color: var(--font-color);
+
+    margin-bottom: 1vh;
+}
+
+.question-div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.question-first-part, .question-second-part, .question-third-part {
+    display: inline-block;
+
+    text-align: center;
+    font-size: smaller;
+    color: var(--form-font-color);
+}
+
+.separator {
+    background-color: transparent;
+
+    width: 1px;
+
+    border-right: var(--font-color) 2px dotted;
+    height: 7vh;
+}
+
+.player-desc-empty-seat-folded {
+    opacity: 0.3;
+}
+
+.current-player {
+    border: var(--error-color) 3px solid;
+    box-shadow: 0 0 10px var(--error-color);
+}
+
+.winner-photo-img {
+    border: var(--success-color) 3px solid;
+    box-shadow: 0 0 10px var(--success-color);
 }

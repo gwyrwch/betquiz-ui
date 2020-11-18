@@ -6,7 +6,7 @@ export default class DatabaseOperations {
             console.log(`Cannot create user - errorCode: ${errorCode}, errorMessage: ${errorMessage}`);
         });
 
-        let database = firebase().database;
+        let database = firebase.database();
         database.ref('users/' + userId).set({
             username: username,
             email: email,
@@ -14,8 +14,20 @@ export default class DatabaseOperations {
             name: name,
             surname: surname,
             profile_picture : null
-        }).then(function () {
-            return false;
+        });
+    }
+
+    static getUserPromiseById(id) {
+        let database = firebase.database();
+        return database.ref('users/' + id).once('value').then(function (snapshot) {
+            return snapshot.val();
+        });
+    }
+
+    static getCategory(id) {
+        let database = firebase.database();
+        return database.ref('categories/' + id).once('value').then(function (snapshot) {
+            return snapshot.val();
         });
     }
 }

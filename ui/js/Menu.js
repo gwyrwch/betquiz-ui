@@ -1,30 +1,28 @@
 import Page from "./Page";
 import html from '../views/menu.html';
 import Modal from "./Modal";
+
 const io = require('socket.io-client');
 
 export default class Menu extends Page {
     constructor() {
         super();
 
-        // let socket = io('130.193.57.125:3000', {
-        //     forceNew: false
-        // });
-
         let self = this;
 
-        firebase.auth().onAuthStateChanged(function(user) {
+        firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 console.log(user.uid);
 
                 let userId = user.uid;
-                firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+                firebase.database().ref('/users/' + userId).once('value').then(function (snapshot) {
                     let userDB = snapshot.val();
                     if (userDB) {
                         let usernameLabel = document.getElementsByClassName(
                             'username-menu'
                         ).item(0);
 
+                        console.log(usernameLabel);
                         usernameLabel.innerHTML = '@' + userDB.username;
                     }
 
@@ -64,7 +62,10 @@ export default class Menu extends Page {
                 'menu-game-buy-in'
             ).item(0).value;
 
-            console.log(tableId, buyIn);
+            return {
+                tableId: tableId,
+                buyIn: buyIn
+            };
         }
 
         function clearModalData() {
@@ -84,6 +85,7 @@ export default class Menu extends Page {
             }
         );
 
+        let userId = firebase.auth().currentUser.uid;
         self.setCardOnclick(
             'card-random-table',
             function () {
@@ -91,7 +93,22 @@ export default class Menu extends Page {
                 Modal.showModal(modalId);
                 startButton.onclick = function () {
                     console.log('random');
-                    getModalData();
+                    let data = getModalData();
+                    let buyIn = parseInt(data.buyIn);
+
+                    socket.emit('find game', {
+                        'userId': userId,
+                        'buyIn': buyIn,
+                        'enterCode': ''
+                    });
+
+                    socket.on('no table found', (response) => {
+                        console.log('NOT FOUND');
+                    });
+
+                    socket.on('table found', (response) => {
+                        location.replace('#table');
+                    });
                 }
             }
         );
@@ -103,7 +120,14 @@ export default class Menu extends Page {
                 Modal.showModal(modalId);
                 startButton.onclick = function () {
                     console.log('create');
-                    getModalData();
+                    let data = getModalData();
+                    let enterCode = data.tableId;
+                    let buyIn = parseInt(data.buyIn);
+
+                    socket.emit('create table', {
+                        buyIn: buyIn,
+                        enterCode: enterCode
+                    });
                 }
             }
         );
@@ -115,7 +139,23 @@ export default class Menu extends Page {
                 Modal.showModal(modalId);
                 startButton.onclick = function () {
                     console.log('join');
-                    getModalData();
+                    let data = getModalData();
+                    let tableId = data.tableId;
+                    let buyIn = parseInt(data.buyIn);
+
+                    socket.emit('find game', {
+                        'userId': userId,
+                        'buyIn': buyIn,
+                        'enterCode': tableId
+                    });
+
+                    socket.on('no table found', (response) => {
+                        console.log('NOT FOUND');
+                    });
+
+                    socket.on('table found', (response) => {
+                        location.replace('#table');
+                    });
                 }
             }
         );
@@ -125,6 +165,7 @@ export default class Menu extends Page {
         let card = document.getElementsByClassName(cardClass).item(0);
         card.onclick = onclickEvent;
     }
+
 
     static getHtml() {
         return html;

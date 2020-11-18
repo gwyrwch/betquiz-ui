@@ -2,12 +2,15 @@ import Page from "./Page";
 import html from '../views/profile.html';
 import Modal from "./Modal";
 import SignInUp from "./SignInUp";
+import BackButton from "./BackButton";
 
 export default class Profile extends Page {
     constructor() {
         super();
 
         let self = this;
+
+        let backButton = new BackButton();
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
@@ -20,6 +23,7 @@ export default class Profile extends Page {
                         let usernameHtml = document.getElementsByClassName(
                             'user-profile-username'
                         ).item(0);
+                        console.log(usernameHtml);
                         usernameHtml.innerHTML = '@' + userDB.username;
 
                         let nameSurnameHtml = document.getElementsByClassName(

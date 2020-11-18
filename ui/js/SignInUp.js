@@ -1,6 +1,5 @@
 import Page from "./Page";
 import html from '../views/signInUp.html';
-import DatabaseOperations from "./DatabaseOperations";
 import Validator from "./Validator";
 
 export default class SignInUp extends Page {
