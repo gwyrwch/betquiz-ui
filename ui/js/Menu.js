@@ -7,13 +7,9 @@ export default class Menu extends Page {
     constructor() {
         super();
 
-        let socket = io('130.193.57.125:3000', {
-            forceNew: false
-        });
-        socket.emit('ping');
-        socket.on('pong', () => {
-           alert(123);
-        });
+        // let socket = io('130.193.57.125:3000', {
+        //     forceNew: false
+        // });
 
         let self = this;
 

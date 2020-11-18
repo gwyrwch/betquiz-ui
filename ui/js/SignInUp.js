@@ -56,12 +56,43 @@ export default class SignInUp extends Page {
         }
     }
 
+    static setPasswordsOninputEvents(passwordInputId, passwordInputRepeatId, submitButtonId) {
+        let passwordInput = document.getElementById(passwordInputId);
+        let passwordRepeatInput = document.getElementById(passwordInputRepeatId);
+
+        let clsError = 'input-invalid-data';
+        let submitButton = document.getElementById(submitButtonId);
+
+        passwordInput.oninput = function () {
+            if (this.value.length < 6) {
+                this.classList.add(clsError);
+                submitButton.disabled = true;
+            } else {
+                if (passwordRepeatInput.value !== this.value) {
+                    passwordRepeatInput.classList.add(clsError);
+                }
+
+                this.classList.remove(clsError);
+                submitButton.disabled = false;
+            }
+        }
+
+        passwordRepeatInput.oninput = function () {
+            if (this.value !== passwordInput.value) {
+                this.classList.add(clsError);
+                submitButton.disabled = true;
+            } else {
+                this.classList.remove(clsError);
+                submitButton.disabled = false;
+            }
+        }
+
+    }
+
     setOninputEvents() {
         let nameInput = document.getElementById('nameSignUp');
         let surnameInput = document.getElementById('surnameSignUp');
         let passportIdInput = document.getElementById('passportIDSignUp');
-        let passwordInput = document.getElementById('passwordSignUp');
-        let passwordRepeatInput = document.getElementById('passwordConfirmSignUp');
 
         let clsError = 'input-invalid-data';
         let submitButton = document.getElementById('submitButtonSignUp');
@@ -76,6 +107,12 @@ export default class SignInUp extends Page {
             }
         }
 
+        SignInUp.setPasswordsOninputEvents(
+            'passwordSignUp',
+            'passwordConfirmSignUp',
+            'submitButtonSignUp'
+        )
+
         surnameInput.oninput = function () {
             if (!Validator.isAlpha(this.value)) {
                 this.classList.add(clsError);
@@ -88,26 +125,6 @@ export default class SignInUp extends Page {
 
         passportIdInput.oninput = function () {
             if (!Validator.isCorrectPassportId(this.value)) {
-                this.classList.add(clsError);
-                submitButton.disabled = true;
-            } else {
-                this.classList.remove(clsError);
-                submitButton.disabled = false;
-            }
-        }
-
-        passwordInput.oninput = function () {
-            if (this.value.length < 6) {
-                this.classList.add(clsError);
-                submitButton.disabled = true;
-            } else {
-                this.classList.remove(clsError);
-                submitButton.disabled = false;
-            }
-        }
-
-        passwordRepeatInput.oninput = function () {
-            if (this.value !== passwordInput.value) {
                 this.classList.add(clsError);
                 submitButton.disabled = true;
             } else {

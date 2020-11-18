@@ -1,6 +1,7 @@
 import Page from "./Page";
 import html from '../views/profile.html';
 import Modal from "./Modal";
+import SignInUp from "./SignInUp";
 
 export default class Profile extends Page {
     constructor() {
@@ -78,6 +79,12 @@ export default class Profile extends Page {
         let settingsButton = document.getElementsByClassName('settings-button').item(0);
         let form = document.getElementsByClassName('settings-form').item(0);
 
+        SignInUp.setPasswordsOninputEvents(
+            'passwordProfileSettings',
+            'passwordConfirmProfileSettings',
+            'submitButtonProfileSettings'
+        );
+
         form.onsubmit = function () {
             let modalId = 'modalConfirmProfileChanges';
             Modal.showModal(modalId);
@@ -89,7 +96,7 @@ export default class Profile extends Page {
 
             let confirmButton = document.getElementsByClassName('confirm-profile-changes-button').item(0);
             confirmButton.onclick = function () {
-                var user = firebase.auth().currentUser;
+                let user = firebase.auth().currentUser;
 
                 let password = document.getElementsByClassName(
                     'confirm-current-password'
@@ -110,22 +117,23 @@ export default class Profile extends Page {
                     firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
                         let userDB = snapshot.val();
                         if (userDB) {
-                            if (userDB.username !== newUsername) {
+                            if (newUsername.length > 2 && userDB.username !== newUsername) {
                                 firebase.database().ref('users/' + userId).update({
                                     username: newUsername,
                                 })
                             }
 
+                            console.log('new password', password)
                             if (password.length > 6) {
                                 user.updatePassword(password).then(function() {
                                     console.log('password updated');
                                 }).catch(function(error) {
-                                    console.log(error, 'in settings button');
+                                    console.log(error.message, 'error in settings button');
                                 });
                             }
 
                             Modal.hideModal(modalId);
-                            location.reload();
+                            // location.reload();
                         }
 
                     });
