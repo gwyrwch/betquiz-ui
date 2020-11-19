@@ -292,8 +292,32 @@
 .user-curve {
     display: inline-block;
     width: 60vw;
+
     /*height: 100%;*/
-    background-color: #5050b3;
+    /*background-color:   rgba(var(--main-color-rgb), 0.7);*/
+
+    /*border-radius: 35px;*/
+}
+
+.ct-perfect-fourth {
+    width: 60vw !important;
+}
+
+.ct-series-a .ct-line {
+    stroke: var(--form-font-color) !important;
+    stroke-width: 2px;
+}
+
+/* This selector overrides the points style on line charts. Points on line charts are actually just very short strokes. This allows you to customize even the point size in CSS */
+.ct-series-a .ct-point {
+    stroke: var(--form-font-color) !important;
+
+    stroke-width: 1vw;
+    stroke-linecap: round;
+}
+
+.ct-series-a .ct-area {
+    fill: var(--form-font-color) !important;
 }
 
 .rating-top {
@@ -453,4 +477,6 @@
 .cancel-profile-changes-button {
     background-color: #F1A0CB;
 }
+
+
 
