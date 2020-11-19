@@ -220,18 +220,28 @@ export default class SignInUp extends Page {
 
         signInButton.onclick = function() {
             this.classList.add('selected-sign-in-up-button', 'selected-sign-in-button');
-            signInForm.style.display = 'block';
-
             signUpButton.classList.remove('selected-sign-in-up-button', 'selected-sign-up-button');
+
+            signInForm.style.display = 'block';
             signUpForm.style.display = 'none';
+
+            setTimeout(function () {
+                signInForm.style.opacity = '1';
+                signUpForm.style.opacity = '0';
+            });
         }
 
         signUpButton.onclick = function() {
             this.classList.add('selected-sign-in-up-button', 'selected-sign-up-button');
+            signInButton.classList.remove('selected-sign-in-up-button', 'selected-sign-in-button');
+
+            signInForm.style.display = 'none';
             signUpForm.style.display = 'block';
 
-            signInButton.classList.remove('selected-sign-in-up-button', 'selected-sign-in-button');
-            signInForm.style.display = 'none';
+            setTimeout(function () {
+                signUpForm.style.opacity = '1';
+                signInForm.style.opacity = '0';
+            });
         }
     }
 

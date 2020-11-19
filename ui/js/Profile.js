@@ -173,11 +173,12 @@ export default class Profile extends Page {
         }
 
         settingsButton.onclick = function () {
-
-            if (form.style.display === 'block') {
-                form.style.display = 'none';
+            if (form.classList.contains('active')) {
+                form.classList.remove('active');
+                form.classList.add('not-active');
             } else {
-                form.style.display = 'block';
+                form.classList.remove('not-active');
+                form.classList.add('active');
             }
         }
     }

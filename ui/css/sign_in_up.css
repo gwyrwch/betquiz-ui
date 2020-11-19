@@ -19,7 +19,7 @@
     width: 100%;
 }
 
-.form-container-sign-up .sign-up-form{
+.form-container-sign-up .sign-up-form {
     position: absolute;
     left: 42vw;
     top: calc(50vh - 59vh / 2);
@@ -34,6 +34,10 @@
     box-shadow: 0 0 3px var(--form-font-color);
 
     padding: 2vw 2vw 3vw;
+
+    opacity: 0;
+
+    transition: opacity 1s  ease-in-out;
 }
 
 .form-container-sign-up .sign-in-form {
@@ -48,6 +52,8 @@
     box-shadow: 0 0 3px var(--form-font-color);
 
     padding: 2vw 2vw 2vw;
+
+    transition: opacity 1s  ease-in-out;
 }
 
 .form-fieldset {
@@ -156,6 +162,7 @@
     left: 13vw;
 
     display: flex;
+    justify-content: center;
 
     width: 22vw;
 }
@@ -199,4 +206,13 @@
 
 #submitButtonSignIn {
     margin-top: 2%;
+}
+
+.sign-in-up-button {
+    transition: all 0.5s cubic-bezier(0.65,-0.25,0.25, 1.95);
+}
+
+.sign-in-button:hover, .sign-in-button:active, .sign-in-button:focus,
+.sign-up-button:hover, .sign-up-button:active, .sign-up-button:focus {
+    width: 15vw;
 }
