@@ -178,10 +178,9 @@ export default class Table extends Page {
                     playerInp.value = self.table.gameState.lastRaiseBet;
                     playerInp.placeholder = 'enter bet...';
 
-                    // playerInp.oninput = function () {
-                    //   let val = this.value;
-                    //   // todo checks
-                    // };
+                    playerInp.oninput = function () {
+                        // let val = this.value;
+                    };
 
                     for (let i = 0; i < 3; i++) {
                         buttons.item(i).disabled = false;
@@ -204,8 +203,8 @@ export default class Table extends Page {
                             console.log(moveType);
 
                             let request = {
-                              answer: null,
-                              tableId: self.table.id
+                                answer: null,
+                                tableId: self.table.id
                             };
 
                             if (moveType === 'Check') {
@@ -216,6 +215,10 @@ export default class Table extends Page {
                                 request.bet = 0;
                             } else if (moveType === 'Raise') {
                                 let raiseVal = parseInt(playerInp.value);
+                                if (raiseVal > self.table.players[myPos].stack + self.table.gameState.bets[myPos]) {
+                                    alert('You cant raise more than you have');
+                                    return;
+                                }
                                 if (raiseVal <= self.table.gameState.lastRaiseBet) {
                                     alert('Please bet more than previous raise');
                                     return;
