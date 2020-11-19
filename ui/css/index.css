@@ -24,6 +24,8 @@
     --settings-profile-form-width: calc(var(--user-information-card-width) + 5vw);
 }
 
+/*todo: theme changing*/
+
 body {
     /*background-image: url("/img/main.webp");*/
     background-color: var(--main-bg-color);

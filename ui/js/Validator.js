@@ -12,4 +12,8 @@ export default class Validator {
     static isCorrectPassportId(passportId) {
         return /[a-zA-Z][a-zA-Z]\d\d\d\d\d\d\d/.test(passportId);
     }
+
+    static isCorrectUsername(username) {
+        return /^[a-z0-9_-]{3,15}$/.test(username);
+    }
 }

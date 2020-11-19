@@ -75,7 +75,7 @@
     margin: 10px 0;
 }
 
-.form-container-sign-up input {
+.form-container-sign-up .sign-up-form input, .sign-in-form input {
     height: 3vh;
     width: 45%;
 

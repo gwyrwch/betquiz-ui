@@ -14,8 +14,6 @@ export default class Profile extends Page {
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                console.log(user.uid);
-
                 let userId = user.uid;
                 firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
                     let userDB = snapshot.val();
@@ -30,17 +28,18 @@ export default class Profile extends Page {
                             'user-profile-name-surname'
                         ).item(0);
                         nameSurnameHtml.innerHTML = userDB.name + ' ' + userDB.surname;
+
+                        self.setPaymentInformationButtonOnclick();
+                        self.setLogoutButtonOnclick();
+                        self.setSettingsButtonOnclick();
                     }
                 });
             } else {
-                // No user is signed in.
+                location.replace('#sign_in_up');
             }
         });
 
 
-        self.setPaymentInformationButtonOnclick();
-        self.setLogoutButtonOnclick();
-        self.setSettingsButtonOnclick();
     }
 
     setLogoutButtonOnclick() {
@@ -89,6 +88,11 @@ export default class Profile extends Page {
             'submitButtonProfileSettings'
         );
 
+        SignInUp.setUsernameOninputEvent(
+            'usernameProfileSettings',
+            'submitButtonProfileSettings'
+        );
+
         form.onsubmit = function () {
             let modalId = 'modalConfirmProfileChanges';
             Modal.showModal(modalId);
@@ -115,32 +119,50 @@ export default class Profile extends Page {
                     credential
                 ).then(function() {
                     let newUsername = document.getElementById('usernameProfileSettings').value;
-                    let password = document.getElementById('passwordProfileSettings').value;
+                    let newPassword = document.getElementById('passwordProfileSettings').value;
 
                     let userId = firebase.auth().currentUser.uid;
+                    let email = firebase.auth().currentUser.email;
                     firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
                         let userDB = snapshot.val();
                         if (userDB) {
                             if (newUsername.length > 2 && userDB.username !== newUsername) {
                                 firebase.database().ref('users/' + userId).update({
                                     username: newUsername,
-                                })
-                            }
-
-                            console.log('new password', password)
-                            if (password.length > 6) {
-                                user.updatePassword(password).then(function() {
-                                    console.log('password updated');
-                                }).catch(function(error) {
-                                    console.log(error.message, 'error in settings button');
+                                }).then(function () {
+                                    Modal.hideModal(modalId);
+                                    location.reload();
                                 });
                             }
-
-                            Modal.hideModal(modalId);
-                            // location.reload();
                         }
-
                     });
+
+                    console.log('new password', newPassword)
+                    if (newPassword.length) {
+                        // FIXME:
+                        user.updatePassword(newPassword).then(function() {
+                            console.log('password updated');
+                            firebase.auth().signOut().then(function() {
+                                console.log('sign out');
+                                firebase.auth().signInWithEmailAndPassword(email, newPassword)
+                                    .then(function(result) {
+                                        console.log('all good');
+                                        Modal.hideModal(modalId);
+                                        location.replace('#profile');
+                                    }).catch(function(error) {
+                                    console.log('err in REsign in');
+                                    console.log(error);
+                                });
+                            }).catch(function(error) {
+                                console.log('Error when sign out user 2', error.message);
+                            });
+                        }).catch(function(error) {
+                            console.log(error.message, 'error in settings button when changing pass');
+                        });
+
+                    }
+                    Modal.hideModal(modalId);
+                        // location.reload();
                 }).catch(function(error) {
                     console.log('err credential', error);
                 });

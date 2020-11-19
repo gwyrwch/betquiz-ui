@@ -45,13 +45,30 @@ export default class SignInUp extends Page {
 
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then(function(result) {
-                    location.replace('#profile');
+                    location.replace('#menu');
                 }).catch(function(error) {
                     // TODO: show error
                     console.log('err in sign in');
                     console.log(error);
             });
             return false;
+        }
+    }
+
+    static setUsernameOninputEvent(usernameInputId, submitButtonId) {
+        let usernameInput = document.getElementById(usernameInputId);
+
+        let clsError = 'input-invalid-data';
+        let submitButton = document.getElementById(submitButtonId);
+
+        usernameInput.oninput = function () {
+            if (!Validator.isCorrectUsername(this.value)) {
+                this.classList.add(clsError);
+                submitButton.disabled = true;
+            } else {
+                this.classList.remove(clsError);
+                submitButton.disabled = false;
+            }
         }
     }
 
@@ -85,7 +102,6 @@ export default class SignInUp extends Page {
                 submitButton.disabled = false;
             }
         }
-
     }
 
     setOninputEvents() {
@@ -95,6 +111,11 @@ export default class SignInUp extends Page {
 
         let clsError = 'input-invalid-data';
         let submitButton = document.getElementById('submitButtonSignUp');
+
+        SignInUp.setUsernameOninputEvent(
+            'usernameSignUp',
+            'submitButtonSignUp'
+        )
 
         nameInput.oninput = function () {
             if (!Validator.isAlpha(this.value)) {
@@ -180,12 +201,10 @@ export default class SignInUp extends Page {
                     name: name,
                     surname: surname,
                     profile_picture : null
-                }).then(function () {
-                    return false;
                 });
-                    return false;
-                }
-            );
+
+                location.replace('#menu');
+            });
 
             // DatabaseOperations.createUserAndSaveToDatabase(self.userId, username, email, password, name, surname);
             return false;
@@ -214,9 +233,6 @@ export default class SignInUp extends Page {
             signInButton.classList.remove('selected-sign-in-up-button', 'selected-sign-in-button');
             signInForm.style.display = 'none';
         }
-
-
-
     }
 
     static getHtml() {
