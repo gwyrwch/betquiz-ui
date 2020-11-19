@@ -3,6 +3,7 @@ import html from '../views/profile.html';
 import Modal from "./Modal";
 import SignInUp from "./SignInUp";
 import BackButton from "./BackButton";
+import DatabaseOperations from "./DatabaseOperations";
 
 export default class Profile extends Page {
     constructor() {
@@ -33,18 +34,32 @@ export default class Profile extends Page {
                         self.setLogoutButtonOnclick();
                         self.setSettingsButtonOnclick();
 
-                        new Chartist.Line('.ct-chart', {
-                            labels: [1, 2, 3, 4, 5, 6, 7, 8],
-                            series: [
-                                [5, 9, 7, 8, 5, 3, 5, 4]
-                            ]
-                        }, {
-                            // low: 0,
-                            showArea: true,
-                            width: '60vw',
-                            height: '48vh'
+                        socket.emit('get stats', {userId : userId});
+                        socket.on('stats graph',  (response) => {
+                            new Chartist.Line('.ct-chart', {
+                                labels: response.x,
+                                series: [
+                                    response.y
+                                ]
+                            }, {
+                                // low: 0,
+                                showArea: true,
+                                width: '60vw',
+                                height: '48vh'
+                            });
                         });
 
+                        socket.on('top players', (response) => {
+                           let topPlayers = response.players;
+
+                           let labels = document.getElementsByClassName('rating-top-username');
+                           for (let i = 0; i < topPlayers.length; i++) {
+                               let promise = DatabaseOperations.getUserPromiseById(topPlayers[i].userId);
+                               promise.then(function (user) {
+                                   labels.item(i).innerHTML = user.username;
+                               })
+                           }
+                        });
                     }
                 });
             } else {
@@ -91,9 +106,26 @@ export default class Profile extends Page {
         //    TODO:
     }
 
+    changeTheme() {
+        document.documentElement.style.setProperty('--main-bg-color', '#353A62')
+        document.documentElement.style.setProperty('--main-dark-bg-color', '#30345C')
+        document.documentElement.style.setProperty('--main-color', '#3F4573')
+        document.documentElement.style.setProperty('--main-dark-color', '#2E3258')
+        document.documentElement.style.setProperty('--secondary-color', '#675AF6')
+        document.documentElement.style.setProperty('--white-color', '#353A61')
+    //     document.documentElement.style.setProperty('--font-color', '#')
+    //     document.documentElement.style.setProperty('--font-secondary-color', '#')
+    //     document.documentElement.style.setProperty('--error-color', '#')
+        document.documentElement.style.setProperty('--success-color', '#00c618')
+    //     document.documentElement.style.setProperty('--form-font-color', '#')
+    }
+
+
     setSettingsButtonOnclick() {
         let settingsButton = document.getElementsByClassName('settings-button').item(0);
         let form = document.getElementsByClassName('settings-form').item(0);
+
+        let self = this;
 
         SignInUp.setPasswordsOninputEvents(
             'passwordProfileSettings',
@@ -128,14 +160,27 @@ export default class Profile extends Page {
                     password
                 );
 
+                let span = document.getElementsByClassName('span-invalid-password-profile-settings').item(0);
+                document.getElementsByClassName(
+                    'confirm-current-password'
+                ).item(0).oninput = function () {
+                    span.style.visibility = 'hidden';
+                }
+
                 user.reauthenticateWithCredential(
                     credential
                 ).then(function() {
                     let newUsername = document.getElementById('usernameProfileSettings').value;
                     let newPassword = document.getElementById('passwordProfileSettings').value;
+                    // let darkTheme = document.getElementById('themeProfileSettings').checked;
 
                     let userId = firebase.auth().currentUser.uid;
                     let email = firebase.auth().currentUser.email;
+
+                    // if (darkTheme) {
+                    //     self.changeTheme();
+                    // }
+
                     firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
                         let userDB = snapshot.val();
                         if (userDB) {
@@ -155,19 +200,14 @@ export default class Profile extends Page {
                         // FIXME:
                         user.updatePassword(newPassword).then(function() {
                             console.log('password updated');
-                            firebase.auth().signOut().then(function() {
-                                console.log('sign out');
-                                firebase.auth().signInWithEmailAndPassword(email, newPassword)
-                                    .then(function(result) {
-                                        console.log('all good');
-                                        Modal.hideModal(modalId);
-                                        location.replace('#profile');
-                                    }).catch(function(error) {
-                                    console.log('err in REsign in');
-                                    console.log(error);
-                                });
-                            }).catch(function(error) {
-                                console.log('Error when sign out user 2', error.message);
+                            firebase.auth().signInWithEmailAndPassword(email, newPassword)
+                                .then(function (result) {
+                                    console.log('all good');
+                                    Modal.hideModal(modalId);
+
+                                }).catch(function (error) {
+                                console.log('err in REsign in');
+                                console.log(error);
                             });
                         }).catch(function(error) {
                             console.log(error.message, 'error in settings button when changing pass');
@@ -175,8 +215,11 @@ export default class Profile extends Page {
 
                     }
                     Modal.hideModal(modalId);
+                    settingsButton.click();
                         // location.reload();
                 }).catch(function(error) {
+                    span.style.visibility = 'visible';
+
                     console.log('err credential', error);
                 });
 

@@ -112,7 +112,7 @@
                 <td>
                     <div class="td-rating-div">
                         <img src="/img/main.webp" class="rating-top-photo-img" alt="">
-                        <label class="rating-top-first">gwyrwch</label>
+                        <label class="rating-top-username rating-top-first">gwyrwch</label>
                     </div>
                 </td>
             </tr>
@@ -124,7 +124,7 @@
                 <td>
                     <div class="td-rating-div">
                         <img src="/img/main.webp" class="rating-top-photo-img" alt="">
-                        <label class="rating-top-second">grispy</label>
+                        <label class="rating-top-username rating-top-second">grispy</label>
                     </div>
                 </td>
             </tr>
@@ -136,7 +136,7 @@
                 <td>
                     <div class="td-rating-div">
                         <img src="/img/main.webp" class="rating-top-photo-img" alt="">
-                        <label class="rating-top-third">hloya</label>
+                        <label class="rating-top-username rating-top-third">hloya</label>
                     </div>
                 </td>
             </tr>
@@ -145,7 +145,7 @@
                 <td>
                     <div class="td-rating-div">
                         <img src="/img/main.webp" class="rating-top-photo-img" alt="">
-                        <label>andrew</label>
+                        <label class="rating-top-username rating-top-forth">hloya</label>
                     </div>
                 </td>
             </tr>
@@ -154,7 +154,7 @@
                 <td>
                     <div class="td-rating-div">
                         <img src="/img/main.webp" class="rating-top-photo-img" alt="">
-                        <label>ruide</label>
+                        <label class="rating-top-username rating-top-fifth">hloya</label>
                     </div>
                 </td>
             </tr>
@@ -176,6 +176,13 @@
             <label for="passwordConfirmProfileSettings"></label>
             <input type="password" id="passwordConfirmProfileSettings" placeholder="password repeat">
         </fieldset>
+<!--        <fieldset class="form-fieldset">-->
+<!--            <legend>Theme update</legend>-->
+<!--            <div class="theme-settings-div">-->
+<!--                <label for="themeProfileSettings">Dark theme</label>-->
+<!--                <input type="checkbox" id="themeProfileSettings">-->
+<!--            </div>-->
+<!--        </fieldset>-->
         <div class="submit-div">
             <input type="submit" id="submitButtonProfileSettings" value="Save">
         </div>
@@ -186,9 +193,12 @@
 <div id="modalConfirmProfileChanges" class="modal">
     <div class="modal-content">
         <div class="menu-modal-header-div">Current password:</div>
-        <label>
-            <input class="confirm-current-password" type="password" placeholder="password">
-        </label>
+        <div>
+            <label>
+                <input class="confirm-current-password" type="password" placeholder="password">
+            </label>
+            <span class="span-invalid-password-profile-settings">invalid password</span>
+        </div>
         <button class="confirm-profile-changes-button">Confirm</button>
         <button class="cancel-profile-changes-button">Cancel</button>
     </div>

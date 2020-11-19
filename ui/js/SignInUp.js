@@ -43,10 +43,31 @@ export default class SignInUp extends Page {
             let email = document.getElementById('emailSignIn').value;
             let password = document.getElementById('passwordSignIn').value;
 
+            document.getElementById('passwordSignIn').oninput = function () {
+                let span = document.getElementsByClassName('span-invalid-password-sign-in').item(0);
+                span.style.visibility = 'hidden';
+            }
+
+            document.getElementById('emailSignIn').oninput = function () {
+                let span = document.getElementsByClassName('span-invalid-password-sign-in').item(0);
+                span.style.visibility = 'hidden';
+            }
+
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then(function(result) {
                     location.replace('#menu');
                 }).catch(function(error) {
+                    let span = document.getElementsByClassName('span-invalid-password-sign-in').item(0);
+
+                    if (error.code === 'auth/user-not-found') {
+                        span.innerHTML = 'user doesn\'t exist';
+                    } else if (error.code === 'auth/wrong-password') {
+                        span.innerHTML = 'invalid password';
+                    } else {
+                        span.innerHTML = 'some errors occurred';
+                    }
+
+                    span.style.visibility = 'visible';
                     // TODO: show error
                     console.log('err in sign in');
                     console.log(error);
@@ -200,7 +221,8 @@ export default class SignInUp extends Page {
                     email: email,
                     name: name,
                     surname: surname,
-                    profile_picture : null
+                    profile_picture : null,
+                    balance: 100000
                 });
 
                 location.replace('#menu');

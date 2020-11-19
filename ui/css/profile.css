@@ -263,7 +263,7 @@
 }
 
 .modal-card-confirm-buttons-div #updateCardConfirmButton {
-    background-color: #b4e092;
+    background-color: var(--success-color);
 }
 
 .modal-card-confirm-buttons-div #updateCardCancelButton {
@@ -432,7 +432,7 @@
 }
 
 .setting-form-container .settings-form input[type=submit]  {
-    background-color: #b4e092;
+    background-color: var(--success-color);
 
     color: var(--white-color);
 
@@ -471,12 +471,55 @@
 }
 
 .confirm-profile-changes-button {
-    background-color: #b4e092;
+    background-color: var(--success-color);
 }
 
 .cancel-profile-changes-button {
     background-color: #F1A0CB;
 }
 
+.span-invalid-password-profile-settings {
+    visibility: hidden;
 
+    position: relative;
+    top: -1.5vh;
+
+    width: 92%;
+
+    font-size: small;
+    color: var(--error-color);
+}
+
+.theme-settings-div {
+    display: flex;
+    align-items: center;
+}
+
+.theme-settings-div label {
+    margin-right: 1vw;
+}
+
+.theme-settings-div input[type=checkbox] {
+    margin: 0;
+}
+
+
+/*input[type=checkbox] {*/
+/*    display: none;*/
+/*}*/
+
+/*.checkbox label:before {*/
+/*    border-radius: 3px;*/
+/*    border-color: #5050b3;*/
+/*    content: "23";*/
+/*}*/
+
+/*input[type=checkbox]:checked {*/
+/*    content: "\2713";*/
+/*    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);*/
+/*    font-size: 15px;*/
+/*    color: #f3f3f3;*/
+/*    text-align: center;*/
+/*    line-height: 15px;*/
+/*}*/
 

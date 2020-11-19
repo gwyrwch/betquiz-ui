@@ -11,14 +11,14 @@
     --font-secondary-color: #A4B7D3;
     --error-color: #ff232d;
     --success-color: #b4e092;
+    --form-font-color: #5050b3;
+    --form-font-color-rgb: 80, 80, 179;
 
     --font-size: 18px;
 
     --table-width: 40vw;
     --table-height: 38vh;
 
-    --form-font-color: #5050b3; /*#A999F8*/
-    --form-font-color-rgb: 80, 80, 179;
     font-family: "Menlo", monospace;
 
     --settings-profile-form-width: calc(var(--user-information-card-width) + 5vw);

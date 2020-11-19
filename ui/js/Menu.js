@@ -20,9 +20,12 @@ export default class Menu extends Page {
                         let usernameLabel = document.getElementsByClassName(
                             'username-menu'
                         ).item(0);
-
-                        console.log(usernameLabel);
                         usernameLabel.innerHTML = '@' + userDB.username;
+
+                        let balanceLabel = document.getElementsByClassName(
+                            'balance-menu'
+                        ).item(0);
+                        balanceLabel.innerHTML = userDB.balance;
                     }
 
                     self.setOnClicksToAllCards();
