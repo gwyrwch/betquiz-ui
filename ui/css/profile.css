@@ -387,7 +387,7 @@
     background-color: var(--error-color);
 }
 
-.payment-info-button:hover, .settings-button:hover {
+.payment-info-button:hover, .settings-button:hover, .add-money-button {
     opacity: 0.7;
 }
 

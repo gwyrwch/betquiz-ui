@@ -46,9 +46,20 @@
 </body>
 <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"/>
-<script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+<script src="https://cdn.socket.io/socket.io-2.3.0.js"></script>
 <script>
-    let socket = io('178.154.235.122:3001');
+    let socket = io('178.154.235.122:3002');
 </script>
+
+<script src="https://kassa.yandex.ru/checkout-ui/v2.js"></script>
+
+<!--HTML-элемент, в котором будет отображаться платежная форма-->
+<div id="payment-form" style="position: absolute;top: 4vh;
+    left: 70vw;"></div>
+
+<script>
+
+</script>
+
 <script type="module" src="dist/main.js"></script>
 </html>

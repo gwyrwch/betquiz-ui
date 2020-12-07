@@ -100,6 +100,29 @@ export default class Profile extends Page {
                 Modal.hideModal(modalId)
             }
         }
+
+        let addMoneyButton = document.getElementsByClassName('add-money-button').item(0);
+        let opened = false;
+        addMoneyButton.onclick = function () {
+            if (opened) {
+                return;
+            }
+            opened = true;
+
+            socket.emit('create payment');
+            socket.on('yandex kassa response', (confirmation_token) => {
+                const checkout = new window.YandexCheckout({
+                    confirmation_token: confirmation_token,
+                    return_url: 'http://178.154.235.122/#payment_ok',
+                    error_callback(error) {
+                        console.log(error);
+                    }
+                });
+
+                //Отображение платежной формы в контейнере
+                checkout.render('payment-form');
+            })
+        };
     }
 
     savePaymentInformation() {
